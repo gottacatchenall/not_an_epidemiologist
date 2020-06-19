@@ -1,4 +1,8 @@
 library(tidyverse)
+library(zoo)
+library(ggthemr)
+ggthemr('fresh', spacing=2 ,layout="scientific")
+thm = theme(panel.border = element_rect(colour = "#222222", fill = NA, size=1), text=element_text(family="Helvetica Neue",size=14))
 setwd("covid-19-data")
 
 # =================================================
@@ -39,10 +43,16 @@ county_level_covid_data$fips = as.character(county_level_covid_data$fips)
 colorado_covid_data = county_level_covid_data %>% filter(state=='Colorado')
 
 colorado_full = colorado_covid_data %>% inner_join(county_demographics, by="fips")
-colorado_full = colorado_full %>% group_by(fips) %>% mutate(number_new_cases= cases - lag(cases))
-colorado_full = colorado_full %>% group_by(fips, date) %>% mutate(new_cases_per_capita=number_new_cases/POPESTIMATE2019)
+colorado_full = colorado_full %>% 
+        group_by(fips) %>% 
+        mutate(number_new_cases= cases - lag(cases)) %>% 
+        group_by(fips, date) %>% 
+        mutate(new_cases_per_capita=number_new_cases/POPESTIMATE2019) 
+colorado_full = colorado_full %>% group_by(fips) %>% mutate(new_cases_moving_average=c(0,0,0,0,rollsum(new_cases_per_capita,5))) %>% glimpse()
 
-full_data %>% 
+
+colorado_full %>% 
     filter(state=='Colorado', county %in% c("Boulder", "Denver", "Arapahoe", "Douglas")) %>% 
-    ggplot(aes(date, new_cases_per_capita, color=county, group=county)) + geom_line() + geom_point() + theme_minimal() + scale_x_date()
+    ggplot(aes(date, new_cases_moving_average, color=county, group=county)) + geom_line(size=2) + 
+    labs(x='', y='New Cases per Capita', title='New Cases per Capita, 5day ma') + scale_x_date() + thm
 
