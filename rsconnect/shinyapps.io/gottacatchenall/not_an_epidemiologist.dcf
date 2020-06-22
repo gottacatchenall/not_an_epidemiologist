@@ -1,0 +1,13 @@
+name: not_an_epidemiologist
+title: not_an_epidemiologist
+username:
+account: gottacatchenall
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2490274
+bundleId: 3303682
+url: https://gottacatchenall.shinyapps.io/not_an_epidemiologist/
+when: 1592859955.90331
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: README.md|.github/ISSUE_TEMPLATE/data-issue.md|.github/ISSUE_TEMPLATE/enhancement.md|.github/ISSUE_TEMPLATE/example.md|.github/ISSUE_TEMPLATE/question.md|src/covid.R
