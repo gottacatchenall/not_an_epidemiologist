@@ -1,13 +1,10 @@
 sidebar = sidebarPanel(
-              sliderInput(inputId = "not functional yet",
-                          label = "useless slider:",
-                          min = 1,
-                          max = 50,
-                          value = 30)
+                      htmlOutput("select_state"),
+                      htmlOutput("select_county")
               )
 
 main_panel = mainPanel(
-    plotOutput(outputId = "distPlot")
+    plotOutput(outputId = "distPlot", width="100%", height="700px")
 )
 
 
