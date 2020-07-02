@@ -2,8 +2,8 @@
 
 To run:
 
-`git clone https://www.github.com/gottacatchenall/not_an_epidemiologist`
-`git submodule update --init`
-`bash run.sh`
+1. `git clone https://www.github.com/gottacatchenall/not_an_epidemiologist`
+2. `git submodule update --init`
+3. `bash run.sh`
 
 
